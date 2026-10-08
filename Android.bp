@@ -7758,9 +7758,12 @@ cc_prebuilt_library_shared {
     soc_specific: true,
 }
 
-rust_prebuilt_dylib {
-    name: "libgpuflag_aconfig_rust",
+cc_prebuilt_library_shared {
+    name: "libgpuflag_aconfig_rust.dylib",
     owner: "google",
+    strip: {
+        none: true,
+    },
     target: {
         android_arm64: {
             srcs: [
@@ -8860,15 +8863,6 @@ prebuilt_etc_xml {
 }
 
 prebuilt_etc_xml {
-    name: "manifest.xml",
-    owner: "google",
-    src: "proprietary/vendor/etc/vintf/manifest/manifest_mapper_framework.xml",
-    filename_from_src: true,
-    sub_dir: "vintf/manifest",
-    soc_specific: true,
-}
-
-prebuilt_etc_xml {
     name: "manifest_aocx.xml",
     owner: "google",
     src: "proprietary/vendor/etc/vintf/manifest/manifest_aocx.xml",
@@ -8881,6 +8875,15 @@ prebuilt_etc_xml {
     name: "manifest_gralloc_aidl2.xml",
     owner: "google",
     src: "proprietary/vendor/etc/vintf/manifest/manifest_gralloc_aidl2.xml",
+    filename_from_src: true,
+    sub_dir: "vintf/manifest",
+    soc_specific: true,
+}
+
+prebuilt_etc_xml {
+    name: "manifest_mapper_framework.xml",
+    owner: "google",
+    src: "proprietary/vendor/etc/vintf/manifest/manifest_mapper_framework.xml",
     filename_from_src: true,
     sub_dir: "vintf/manifest",
     soc_specific: true,
@@ -9220,7 +9223,7 @@ sh_binary {
     soc_specific: true,
 }
 
-rust_prebuilt_binary {
+cc_prebuilt_binary {
     name: "dump_modem",
     owner: "google",
     target: {
@@ -9229,10 +9232,8 @@ rust_prebuilt_binary {
                 "proprietary/vendor/bin/dump/dump_modem",
             ],
             shared_libs: [
+                "libstd.dylib",
                 "libc",
-            ],
-            rustlibs: [
-                "libstd",
             ],
         },
     },
@@ -9516,7 +9517,7 @@ cc_prebuilt_binary {
     soc_specific: true,
 }
 
-rust_prebuilt_binary {
+cc_prebuilt_binary {
     name: "gpuflag",
     owner: "google",
     target: {
@@ -9525,13 +9526,11 @@ rust_prebuilt_binary {
                 "proprietary/vendor/bin/gpuflag",
             ],
             shared_libs: [
+                "libandroid_logger.dylib",
+                "librustutils.dylib",
+                "liblog_rust.dylib",
+                "libstd.dylib",
                 "libc",
-            ],
-            rustlibs: [
-                "libandroid_logger",
-                "librustutils",
-                "liblog_rust",
-                "libstd",
             ],
         },
     },

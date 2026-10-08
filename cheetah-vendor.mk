@@ -2751,7 +2751,7 @@ PRODUCT_PACKAGES += \
     libedgetpu_util \
     libexynosdisplay \
     libgf_hal \
-    libgpuflag_aconfig_rust \
+    libgpuflag_aconfig_rust.dylib \
     libgril_oem-google \
     libgxp \
     libmodem_svc_proto_legacy_soong \
@@ -2809,9 +2809,9 @@ PRODUCT_PACKAGES += \
     fingerprint-goodix.xml \
     flood_control.xml \
     hwc3-default.xml \
-    manifest.xml \
     manifest_aocx.xml \
     manifest_gralloc_aidl2.xml \
+    manifest_mapper_framework.xml \
     manifest_radioext.xml \
     pixel-display-default.xml \
     qorvo.uwb-service.xml \
