@@ -2686,6 +2686,7 @@ PRODUCT_PACKAGES += \
     libsitril \
     libstreset21 \
     libsueznanoappclients \
+    libtinycompress_vendor \
     libusf \
     libvendorgraphicbuffer \
     modem_android_property_manager \
