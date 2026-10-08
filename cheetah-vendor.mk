@@ -2811,7 +2811,6 @@ PRODUCT_PACKAGES += \
     hwc3-default.xml \
     manifest_aocx.xml \
     manifest_gralloc_aidl2.xml \
-    manifest_mapper_framework.xml \
     manifest_radioext.xml \
     pixel-display-default.xml \
     qorvo.uwb-service.xml \
