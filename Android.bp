@@ -214,6 +214,18 @@ cc_prebuilt_library_shared {
 }
 
 android_app_import {
+    name: "NowPlayingPrebuilt",
+    owner: "google",
+    apk: "proprietary/product/app/NowPlayingPrebuilt/NowPlayingPrebuilt.apk",
+    preprocessed: true,
+    presigned: true,
+    dex_preopt: {
+        enabled: false,
+    },
+    product_specific: true,
+}
+
+android_app_import {
     name: "VZWAPNLib",
     owner: "google",
     apk: "proprietary/product/app/VZWAPNLib/VZWAPNLib.apk",
@@ -301,9 +313,9 @@ android_app_import {
 }
 
 android_app_import {
-    name: "DeviceIntelligenceNetworkPrebuilt-astrea_20240329.00_RC02",
+    name: "DeviceIntelligenceNetworkPrebuiltAstrea",
     owner: "google",
-    apk: "proprietary/product/priv-app/DeviceIntelligenceNetworkPrebuilt-astrea_20240329.00_RC02/DeviceIntelligenceNetworkPrebuilt-astrea_20240329.00_RC02.apk",
+    apk: "proprietary/product/priv-app/DeviceIntelligenceNetworkPrebuiltAstrea/DeviceIntelligenceNetworkPrebuiltAstrea.apk",
     preprocessed: true,
     presigned: true,
     dex_preopt: {
@@ -314,9 +326,9 @@ android_app_import {
 }
 
 android_app_import {
-    name: "DevicePersonalizationPrebuiltPixel2022-playstore_aiai_20250306.00_RC10",
+    name: "DevicePersonalizationAiAiPrebuiltPixel2022",
     owner: "google",
-    apk: "proprietary/product/priv-app/DevicePersonalizationPrebuiltPixel2022-playstore_aiai_20250306.00_RC10/DevicePersonalizationPrebuiltPixel2022-playstore_aiai_20250306.00_RC10.apk",
+    apk: "proprietary/product/priv-app/DevicePersonalizationAiAiPrebuiltPixel2022/DevicePersonalizationAiAiPrebuiltPixel2022.apk",
     preprocessed: true,
     presigned: true,
     dex_preopt: {
@@ -390,9 +402,9 @@ android_app_import {
 }
 
 android_app_import {
-    name: "PixelCameraServicesConnectivityClient",
+    name: "PixelCameraServices",
     owner: "google",
-    apk: "proprietary/product/priv-app/PixelCameraServicesConnectivityClient/PixelCameraServicesConnectivityClient.apk",
+    apk: "proprietary/product/priv-app/PixelCameraServices/PixelCameraServices.apk",
     preprocessed: true,
     presigned: true,
     dex_preopt: {
@@ -563,18 +575,6 @@ android_app_import {
 }
 
 android_app_import {
-    name: "RilConfigService",
-    owner: "google",
-    apk: "proprietary/system_ext/priv-app/RilConfigService/RilConfigService.apk",
-    certificate: "platform",
-    dex_preopt: {
-        enabled: false,
-    },
-    privileged: true,
-    system_ext_specific: true,
-}
-
-android_app_import {
     name: "ShannonIms",
     owner: "google",
     apk: "proprietary/system_ext/priv-app/ShannonIms/ShannonIms.apk",
@@ -735,6 +735,15 @@ prebuilt_etc_xml {
 }
 
 prebuilt_etc_xml {
+    name: "camera_interference_avoidance_framework_compatibility_matrix_system_ext",
+    owner: "google",
+    src: "proprietary/system_ext/etc/vintf/camera_interference_avoidance_framework_compatibility_matrix_system_ext",
+    filename_from_src: true,
+    sub_dir: "vintf",
+    system_ext_specific: true,
+}
+
+prebuilt_etc_xml {
     name: "imageprocessing_hal_framework_compatibility_matrix_system_ext",
     owner: "google",
     src: "proprietary/system_ext/etc/vintf/imageprocessing_hal_framework_compatibility_matrix_system_ext",
@@ -856,6 +865,47 @@ install_symlink {
 }
 
 cc_prebuilt_library_shared {
+    name: "aconfig_gpu_flags_c_lib",
+    owner: "google",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm: {
+            srcs: [
+                "proprietary/vendor/lib/aconfig_gpu_flags_c_lib.so",
+            ],
+            shared_libs: [
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/aconfig_gpu_flags_c_lib.so",
+            ],
+            shared_libs: [
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "both",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
     name: "aoc_aud_ext",
     owner: "google",
     strip: {
@@ -942,7 +992,7 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
-    name: "aocx-V2-ndk",
+    name: "aocx-V3-ndk",
     owner: "google",
     strip: {
         none: true,
@@ -950,7 +1000,7 @@ cc_prebuilt_library_shared {
     target: {
         android_arm: {
             srcs: [
-                "proprietary/vendor/lib/aocx-V2-ndk.so",
+                "proprietary/vendor/lib/aocx-V3-ndk.so",
             ],
             shared_libs: [
                 "libbinder_ndk",
@@ -962,7 +1012,7 @@ cc_prebuilt_library_shared {
         },
         android_arm64: {
             srcs: [
-                "proprietary/vendor/lib64/aocx-V2-ndk.so",
+                "proprietary/vendor/lib64/aocx-V3-ndk.so",
             ],
             shared_libs: [
                 "libbinder_ndk",
@@ -1154,8 +1204,8 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/audio_bt_aoc.so",
             ],
             shared_libs: [
-                "android.hardware.bluetooth.audio-V5-ndk",
-                "android.hardware.audio.common-V4-ndk",
+                "android.hardware.bluetooth.audio-V6-ndk",
+                "android.hardware.audio.common-V5-ndk",
                 "audio.primary.gs201",
                 "libbase",
                 "liblog",
@@ -1176,8 +1226,8 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/audio_bt_aoc.so",
             ],
             shared_libs: [
-                "android.hardware.bluetooth.audio-V5-ndk",
-                "android.hardware.audio.common-V4-ndk",
+                "android.hardware.bluetooth.audio-V6-ndk",
+                "android.hardware.audio.common-V5-ndk",
                 "audio.primary.gs201",
                 "libbase",
                 "liblog",
@@ -1573,6 +1623,7 @@ cc_prebuilt_library_shared {
                 "libvndksupport",
                 "libcutils",
                 "libhardware",
+                "aconfig_gpu_flags_c_lib",
                 "libdmabufheap",
                 "libz",
                 "android.hardware.graphics.common-V7-ndk",
@@ -1600,6 +1651,7 @@ cc_prebuilt_library_shared {
                 "libvndksupport",
                 "libcutils",
                 "libhardware",
+                "aconfig_gpu_flags_c_lib",
                 "libdmabufheap",
                 "libz",
                 "android.hardware.graphics.common-V7-ndk",
@@ -2079,6 +2131,12 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libExynosC2ComponentStore.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
+                "libutils",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2091,7 +2149,6 @@ cc_prebuilt_library_shared {
                 "liblog",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_xmlparser",
                 "libion",
@@ -2106,6 +2163,12 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libExynosC2ComponentStore.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
+                "libutils",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2118,7 +2181,6 @@ cc_prebuilt_library_shared {
                 "liblog",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_xmlparser",
                 "libion",
@@ -2146,6 +2208,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libExynosC2H263Dec.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2159,7 +2226,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2178,6 +2244,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libExynosC2H263Dec.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2191,7 +2262,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2223,6 +2293,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libExynosC2H263Enc.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2236,7 +2311,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2255,6 +2329,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libExynosC2H263Enc.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2268,7 +2347,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2300,6 +2378,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libExynosC2H264Dec.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2313,7 +2396,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2332,6 +2414,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libExynosC2H264Dec.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2345,7 +2432,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2377,6 +2463,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libExynosC2H264Enc.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2390,7 +2481,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2409,6 +2499,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libExynosC2H264Enc.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2422,7 +2517,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2454,6 +2548,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libExynosC2HevcDec.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2467,7 +2566,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2486,6 +2584,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libExynosC2HevcDec.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2499,7 +2602,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2531,6 +2633,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libExynosC2HevcEnc.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2544,7 +2651,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2563,6 +2669,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libExynosC2HevcEnc.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2576,7 +2687,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2608,6 +2718,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libExynosC2Mpeg4Dec.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2621,7 +2736,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2640,6 +2754,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libExynosC2Mpeg4Dec.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2653,7 +2772,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2685,6 +2803,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libExynosC2Mpeg4Enc.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2698,7 +2821,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2717,6 +2839,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libExynosC2Mpeg4Enc.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2730,7 +2857,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2762,6 +2888,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libExynosC2Vp8Dec.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2775,7 +2906,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2794,6 +2924,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libExynosC2Vp8Dec.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2807,7 +2942,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2839,6 +2973,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libExynosC2Vp8Enc.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2852,7 +2991,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2871,6 +3009,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libExynosC2Vp8Enc.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2884,7 +3027,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2916,6 +3058,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libExynosC2Vp9Dec.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2929,7 +3076,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2948,6 +3094,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libExynosC2Vp9Dec.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -2961,7 +3112,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -2993,6 +3143,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libExynosC2Vp9Enc.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -3006,7 +3161,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -3025,6 +3179,11 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libExynosC2Vp9Enc.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libion_google",
                 "libbinder_ndk",
                 "libmedia_ecoservice",
@@ -3038,7 +3197,6 @@ cc_prebuilt_library_shared {
                 "libutils",
                 "libcutils",
                 "libcodec2",
-                "libcodec2_vndk",
                 "libsfplugin_ccodec_utils",
                 "libstagefright_foundation",
                 "libstagefright_xmlparser",
@@ -3107,17 +3265,16 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/lib_aion_buffer.so",
             ],
             shared_libs: [
+                "libvndksupport",
                 "pixel-power-ext-V1-ndk",
                 "android.hardware.graphics.mapper@4.0",
                 "android.hardware.graphics.allocator-V2-ndk",
                 "libbinder_ndk",
                 "libhidlbase",
-                "libvndksupport",
                 "android.hardware.graphics.common@1.2",
                 "libcutils",
                 "libdmabufheap",
                 "libhardware",
-                "libion",
                 "liblog",
                 "libutils",
                 "libc++",
@@ -3131,17 +3288,16 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/lib_aion_buffer.so",
             ],
             shared_libs: [
+                "libvndksupport",
                 "pixel-power-ext-V1-ndk",
                 "android.hardware.graphics.mapper@4.0",
                 "android.hardware.graphics.allocator-V2-ndk",
                 "libbinder_ndk",
                 "libhidlbase",
-                "libvndksupport",
                 "android.hardware.graphics.common@1.2",
                 "libcutils",
                 "libdmabufheap",
                 "libhardware",
-                "libion",
                 "liblog",
                 "libutils",
                 "libc++",
@@ -3169,7 +3325,6 @@ cc_prebuilt_library_shared {
             ],
             shared_libs: [
                 "libcutils",
-                "libion_google",
                 "liblog",
                 "libutils",
                 "libacryl_hdr_plugin",
@@ -3186,7 +3341,6 @@ cc_prebuilt_library_shared {
             ],
             shared_libs: [
                 "libcutils",
-                "libion_google",
                 "liblog",
                 "libutils",
                 "libacryl_hdr_plugin",
@@ -3434,7 +3588,7 @@ cc_prebuilt_library_shared {
                 "libbase",
                 "liblog",
                 "libutils",
-                "aocx-V2-ndk",
+                "aocx-V3-ndk",
                 "libc++",
                 "libc",
                 "libm",
@@ -3450,7 +3604,7 @@ cc_prebuilt_library_shared {
                 "libbase",
                 "liblog",
                 "libutils",
-                "aocx-V2-ndk",
+                "aocx-V3-ndk",
                 "libc++",
                 "libc",
                 "libm",
@@ -3590,7 +3744,7 @@ cc_prebuilt_library_shared {
                 "libbinder",
                 "libcutils",
                 "liblog",
-                "libprotobuf-cpp-full",
+                "libprotobuf-cpp-full-6.33.5-absl20260526",
                 "libutils",
                 "libc++",
                 "libc",
@@ -3608,7 +3762,7 @@ cc_prebuilt_library_shared {
                 "libbinder",
                 "libcutils",
                 "liblog",
-                "libprotobuf-cpp-full",
+                "libprotobuf-cpp-full-6.33.5-absl20260526",
                 "libutils",
                 "libc++",
                 "libc",
@@ -3846,11 +4000,14 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libgc2_av1_dec.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "liblog",
                 "libutils",
                 "libcutils",
                 "libbase",
-                "libcodec2_vndk",
                 "libcodec2",
                 "android.hardware.graphics.common@1.2",
                 "libstagefright_foundation",
@@ -3871,11 +4028,14 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libgc2_av1_dec.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "liblog",
                 "libutils",
                 "libcutils",
                 "libbase",
-                "libcodec2_vndk",
                 "libcodec2",
                 "android.hardware.graphics.common@1.2",
                 "libstagefright_foundation",
@@ -3909,12 +4069,15 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libgc2_base.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libui",
                 "liblog",
                 "libutils",
                 "libcutils",
                 "libbase",
-                "libcodec2_vndk",
                 "libcodec2",
                 "libstagefright_foundation",
                 "libion_google",
@@ -3932,12 +4095,15 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libgc2_base.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "libui",
                 "liblog",
                 "libutils",
                 "libcutils",
                 "libbase",
-                "libcodec2_vndk",
                 "libcodec2",
                 "libstagefright_foundation",
                 "libion_google",
@@ -3968,9 +4134,13 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libgc2_cwl.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
+                "libutils",
                 "liblog",
                 "libcutils",
-                "libcodec2_vndk",
                 "libcodec2",
                 "android.hardware.graphics.common@1.2",
                 "libbase",
@@ -3988,9 +4158,13 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libgc2_cwl.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
+                "libutils",
                 "liblog",
                 "libcutils",
-                "libcodec2_vndk",
                 "libcodec2",
                 "android.hardware.graphics.common@1.2",
                 "libbase",
@@ -4062,10 +4236,13 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libgc2_store.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "liblog",
                 "libutils",
                 "libbase",
-                "libcodec2_vndk",
                 "libcodec2",
                 "libgc2_log",
                 "libion_google",
@@ -4081,10 +4258,13 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libgc2_store.so",
             ],
             shared_libs: [
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
                 "liblog",
                 "libutils",
                 "libbase",
-                "libcodec2_vndk",
                 "libcodec2",
                 "libgc2_log",
                 "libion_google",
@@ -4156,7 +4336,7 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libgooglerilaudio.so",
             ],
             shared_libs: [
-                "vendor.google.whitechapel.audio.extension-V7-ndk",
+                "vendor.google.whitechapel.audio.extension-V8-ndk",
                 "libbase",
                 "libbinder_ndk",
                 "libcutils",
@@ -4175,7 +4355,7 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libgooglerilaudio.so",
             ],
             shared_libs: [
-                "vendor.google.whitechapel.audio.extension-V7-ndk",
+                "vendor.google.whitechapel.audio.extension-V8-ndk",
                 "libbase",
                 "libbinder_ndk",
                 "libcutils",
@@ -4515,6 +4695,82 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
+    name: "libprotobuf-cpp-full-6.33.5-absl20260526",
+    owner: "google",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm: {
+            srcs: [
+                "proprietary/vendor/lib/libprotobuf-cpp-full-6.33.5-absl20260526.so",
+            ],
+            shared_libs: [
+                "libz",
+                "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libprotobuf-cpp-full-6.33.5-absl20260526.so",
+            ],
+            shared_libs: [
+                "libz",
+                "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "both",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libprotobuf-cpp-lite-6.33.5-absl20260526",
+    owner: "google",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm: {
+            srcs: [
+                "proprietary/vendor/lib/libprotobuf-cpp-lite-6.33.5-absl20260526.so",
+            ],
+            shared_libs: [
+                "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libprotobuf-cpp-lite-6.33.5-absl20260526.so",
+            ],
+            shared_libs: [
+                "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "both",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
     name: "libqorvo_uwb_params_nfcc",
     owner: "google",
     strip: {
@@ -4571,13 +4827,14 @@ cc_prebuilt_library_shared {
             shared_libs: [
                 "libril_gfeature",
                 "libgooglerilmemmonitor",
-                "android.hardware.radio.config-V1-ndk",
-                "android.hardware.radio.data-V1-ndk",
-                "android.hardware.radio.messaging-V1-ndk",
-                "android.hardware.radio.modem-V1-ndk",
-                "android.hardware.radio.network-V1-ndk",
-                "android.hardware.radio.sim-V1-ndk",
-                "android.hardware.radio.voice-V1-ndk",
+                "android.hardware.radio.config-V3-ndk",
+                "android.hardware.radio.data-V3-ndk",
+                "android.hardware.radio.messaging-V3-ndk",
+                "android.hardware.radio.modem-V3-ndk",
+                "android.hardware.radio.network-V3-ndk",
+                "android.hardware.radio.sim-V3-ndk",
+                "android.hardware.radio.voice-V3-ndk",
+                "android.hardware.radio.sap-V1-ndk",
                 "liblog",
                 "libutils",
                 "libcutils",
@@ -4598,13 +4855,14 @@ cc_prebuilt_library_shared {
             shared_libs: [
                 "libril_gfeature",
                 "libgooglerilmemmonitor",
-                "android.hardware.radio.config-V1-ndk",
-                "android.hardware.radio.data-V1-ndk",
-                "android.hardware.radio.messaging-V1-ndk",
-                "android.hardware.radio.modem-V1-ndk",
-                "android.hardware.radio.network-V1-ndk",
-                "android.hardware.radio.sim-V1-ndk",
-                "android.hardware.radio.voice-V1-ndk",
+                "android.hardware.radio.config-V3-ndk",
+                "android.hardware.radio.data-V3-ndk",
+                "android.hardware.radio.messaging-V3-ndk",
+                "android.hardware.radio.modem-V3-ndk",
+                "android.hardware.radio.network-V3-ndk",
+                "android.hardware.radio.sim-V3-ndk",
+                "android.hardware.radio.voice-V3-ndk",
+                "android.hardware.radio.sap-V1-ndk",
                 "liblog",
                 "libutils",
                 "libcutils",
@@ -4682,13 +4940,14 @@ cc_prebuilt_library_shared {
                 "android.hardware.radio@1.6",
                 "libril-aidl",
                 "libbase",
-                "android.hardware.radio.config-V1-ndk",
-                "android.hardware.radio.data-V1-ndk",
-                "android.hardware.radio.messaging-V1-ndk",
-                "android.hardware.radio.modem-V1-ndk",
-                "android.hardware.radio.network-V1-ndk",
-                "android.hardware.radio.sim-V1-ndk",
-                "android.hardware.radio.voice-V1-ndk",
+                "android.hardware.radio.config-V3-ndk",
+                "android.hardware.radio.data-V3-ndk",
+                "android.hardware.radio.messaging-V3-ndk",
+                "android.hardware.radio.modem-V3-ndk",
+                "android.hardware.radio.network-V3-ndk",
+                "android.hardware.radio.sim-V3-ndk",
+                "android.hardware.radio.voice-V3-ndk",
+                "android.hardware.radio.sap-V1-ndk",
                 "libbinder_ndk",
                 "liblog",
                 "libutils",
@@ -4724,13 +4983,14 @@ cc_prebuilt_library_shared {
                 "android.hardware.radio@1.6",
                 "libril-aidl",
                 "libbase",
-                "android.hardware.radio.config-V1-ndk",
-                "android.hardware.radio.data-V1-ndk",
-                "android.hardware.radio.messaging-V1-ndk",
-                "android.hardware.radio.modem-V1-ndk",
-                "android.hardware.radio.network-V1-ndk",
-                "android.hardware.radio.sim-V1-ndk",
-                "android.hardware.radio.voice-V1-ndk",
+                "android.hardware.radio.config-V3-ndk",
+                "android.hardware.radio.data-V3-ndk",
+                "android.hardware.radio.messaging-V3-ndk",
+                "android.hardware.radio.modem-V3-ndk",
+                "android.hardware.radio.network-V3-ndk",
+                "android.hardware.radio.sim-V3-ndk",
+                "android.hardware.radio.voice-V3-ndk",
+                "android.hardware.radio.sap-V1-ndk",
                 "libbinder_ndk",
                 "liblog",
                 "libutils",
@@ -4979,7 +5239,7 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib/libsitril.so",
             ],
             shared_libs: [
-                "vendor.google.whitechapel.audio.extension-V7-ndk",
+                "vendor.google.whitechapel.audio.extension-V8-ndk",
                 "libril_gfeature",
                 "libbinder_ndk",
                 "libgooglerilaudio",
@@ -5010,7 +5270,7 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libsitril.so",
             ],
             shared_libs: [
-                "vendor.google.whitechapel.audio.extension-V7-ndk",
+                "vendor.google.whitechapel.audio.extension-V8-ndk",
                 "libril_gfeature",
                 "libbinder_ndk",
                 "libgooglerilaudio",
@@ -5094,7 +5354,7 @@ cc_prebuilt_library_shared {
             ],
             shared_libs: [
                 "android.frameworks.stats-V2-ndk",
-                "android.hardware.contexthub-V4-ndk",
+                "android.hardware.contexthub-V5-ndk",
                 "libaconfig_storage_read_api_cc",
                 "libbase",
                 "libbinder_ndk",
@@ -5114,7 +5374,7 @@ cc_prebuilt_library_shared {
             ],
             shared_libs: [
                 "android.frameworks.stats-V2-ndk",
-                "android.hardware.contexthub-V4-ndk",
+                "android.hardware.contexthub-V5-ndk",
                 "libaconfig_storage_read_api_cc",
                 "libbase",
                 "libbinder_ndk",
@@ -5149,6 +5409,7 @@ cc_prebuilt_library_shared {
                 "libaoc",
                 "libevent",
                 "libui",
+                "libbase",
                 "libcutils",
                 "libhardware",
                 "liblog",
@@ -5167,6 +5428,7 @@ cc_prebuilt_library_shared {
                 "libaoc",
                 "libevent",
                 "libui",
+                "libbase",
                 "libcutils",
                 "libhardware",
                 "liblog",
@@ -5769,7 +6031,7 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
-    name: "vendor.google.whitechapel.audio.extension-V7-ndk",
+    name: "vendor.google.whitechapel.audio.extension-V8-ndk",
     owner: "google",
     strip: {
         none: true,
@@ -5777,7 +6039,7 @@ cc_prebuilt_library_shared {
     target: {
         android_arm: {
             srcs: [
-                "proprietary/vendor/lib/vendor.google.whitechapel.audio.extension-V7-ndk.so",
+                "proprietary/vendor/lib/vendor.google.whitechapel.audio.extension-V8-ndk.so",
             ],
             shared_libs: [
                 "libbinder_ndk",
@@ -5789,7 +6051,7 @@ cc_prebuilt_library_shared {
         },
         android_arm64: {
             srcs: [
-                "proprietary/vendor/lib64/vendor.google.whitechapel.audio.extension-V7-ndk.so",
+                "proprietary/vendor/lib64/vendor.google.whitechapel.audio.extension-V8-ndk.so",
             ],
             shared_libs: [
                 "libbinder_ndk",
@@ -6148,6 +6410,58 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
+    name: "aconfig_gsc_flags_c_lib",
+    owner: "google",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/aconfig_gsc_flags_c_lib.so",
+            ],
+            shared_libs: [
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "android.frameworks.stats-V3-ndk",
+    owner: "google",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/android.frameworks.stats-V3-ndk.so",
+            ],
+            shared_libs: [
+                "libbinder_ndk",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
     name: "android.hardware.authsecret-impl.nos",
     owner: "google",
     strip: {
@@ -6165,8 +6479,10 @@ cc_prebuilt_library_shared {
                 "libnosprotos",
                 "libutils",
                 "android.hardware.authsecret-V1-ndk",
+                "aconfig_gsc_flags_c_lib",
                 "libbinder_ndk",
                 "libcrypto",
+                "libnos_feature",
                 "libc++",
                 "libc",
                 "libm",
@@ -6197,7 +6513,7 @@ cc_prebuilt_library_shared {
                 "libnosprotos",
                 "libutils",
                 "android.hardware.oemlock-V1-ndk",
-                "libprotobuf-cpp-full",
+                "libprotobuf-cpp-full-6.33.5-absl20260526",
                 "nos_app_avb",
                 "libbinder_ndk",
                 "libc++",
@@ -6293,21 +6609,49 @@ cc_prebuilt_library_shared {
             shared_libs: [
                 "libnos",
                 "libnosprotos",
-                "android.hardware.security.keymint-V3-ndk",
                 "android.hardware.security.rkp-V3-ndk",
                 "android.hardware.security.sharedsecret-V1-ndk",
                 "libbase",
                 "libbinder_ndk",
                 "libcppbor",
                 "libcrypto",
+                "libcutils",
                 "libhidlbase",
                 "libkeymaster_portable",
                 "libkeymaster_messages",
-                "libkeymint_support_V3",
                 "liblog",
+                "libnos_citadeld_proxy",
+                "libnos_feature",
                 "libutils",
-                "libprotobuf-cpp-full",
+                "libprotobuf-cpp-full-6.33.5-absl20260526",
                 "nos_app_keymaster",
+                "android.hardware.security.keymint-V3-ndk",
+                "libkeymint_support_V3",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "android.hardware.security.timestamp-V1-ndk",
+    owner: "google",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/android.hardware.security.timestamp-V1-ndk.so",
+            ],
+            shared_libs: [
+                "libbinder_ndk",
                 "libc++",
                 "libc",
                 "libm",
@@ -6337,8 +6681,8 @@ cc_prebuilt_library_shared {
                 "libnos",
                 "libnosprotos",
                 "libutils",
-                "android.hardware.weaver-V2-ndk",
-                "libprotobuf-cpp-full",
+                "android.hardware.weaver-V3-ndk",
+                "libprotobuf-cpp-full-6.33.5-absl20260526",
                 "nos_app_weaver",
                 "libnos_citadeld_proxy",
                 "libnos_feature",
@@ -6374,9 +6718,9 @@ cc_prebuilt_library_shared {
                 "libnos",
                 "libnosprotos",
                 "libutils",
-                "android.hardware.weaver-V2-ndk",
+                "android.hardware.weaver-V3-ndk",
                 "libbinder_ndk",
-                "libprotobuf-cpp-full",
+                "libprotobuf-cpp-full-6.33.5-absl20260526",
                 "nos_app_weaver",
                 "libnos_citadeld_proxy",
                 "libc++",
@@ -6408,7 +6752,7 @@ cc_prebuilt_library_shared {
                 "libnos",
                 "libnosprotos",
                 "libutils",
-                "android.hardware.weaver-V2-ndk",
+                "android.hardware.weaver-V3-ndk",
                 "libbinder_ndk",
                 "libnos_citadeld_proxy",
                 "libc++",
@@ -6559,6 +6903,33 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
+    name: "com.google.hardware.pixel.display-V23-ndk",
+    owner: "google",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/com.google.hardware.pixel.display-V23-ndk.so",
+            ],
+            shared_libs: [
+                "libbinder_ndk",
+                "android.hardware.graphics.common-V7-ndk",
+                "android.hardware.common-V2-ndk",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
     name: "com.google.input-V2-ndk",
     owner: "google",
     strip: {
@@ -6584,7 +6955,7 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
-    name: "com.google.input-V6-ndk",
+    name: "com.google.input-V8-ndk",
     owner: "google",
     strip: {
         none: true,
@@ -6592,7 +6963,7 @@ cc_prebuilt_library_shared {
     target: {
         android_arm64: {
             srcs: [
-                "proprietary/vendor/lib64/com.google.input-V6-ndk.so",
+                "proprietary/vendor/lib64/com.google.input-V8-ndk.so",
             ],
             shared_libs: [
                 "libbinder_ndk",
@@ -6780,7 +7151,7 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/hw/android.hardware.vibrator-impl.cs40l26.so",
             ],
             shared_libs: [
-                "libprotobuf-cpp-lite",
+                "libprotobuf-cpp-lite-6.33.5-absl20260526",
                 "libbinder_ndk",
                 "libhardware",
                 "liblog",
@@ -6873,7 +7244,7 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libExynosHWCService.so",
             ],
             shared_libs: [
-                "com.google.hardware.pixel.display-V17-ndk",
+                "com.google.hardware.pixel.display-V23-ndk",
                 "liblog",
                 "libcutils",
                 "libutils",
@@ -6883,7 +7254,7 @@ cc_prebuilt_library_shared {
                 "android.hardware.graphics.composer@2.4",
                 "android.hardware.graphics.allocator@2.0",
                 "android.hardware.graphics.mapper@2.0",
-                "android.hardware.graphics.composer3-V4-ndk",
+                "android.hardware.graphics.composer3-V5-ndk",
                 "android.hardware.drm-V1-ndk",
                 "android.frameworks.stats-V2-ndk",
                 "libpixelatoms_defs",
@@ -6990,15 +7361,19 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libcodec2_soft_ddpdec.so",
             ],
             shared_libs: [
-                "libdeccfg",
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
+                "libcodec2_soft_common",
+                "libsfplugin_ccodec_utils",
+                "libcodec2_store_dolby",
                 "libstagefright_foundation",
                 "libutils",
                 "libcutils",
                 "liblog",
-                "libcodec2",
-                "libcodec2_vndk",
-                "libcodec2_soft_common",
-                "libcodec2_store_dolby",
                 "libc++",
                 "libc",
                 "libm",
@@ -7045,7 +7420,7 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
-    name: "libdapparamstorage",
+    name: "libcommand_fds.dylib",
     owner: "google",
     strip: {
         none: true,
@@ -7053,16 +7428,12 @@ cc_prebuilt_library_shared {
     target: {
         android_arm64: {
             srcs: [
-                "proprietary/vendor/lib64/libdapparamstorage.so",
+                "proprietary/vendor/lib64/libcommand_fds.dylib.so",
             ],
             shared_libs: [
-                "libcutils",
-                "libutils",
-                "liblog",
-                "libc++",
+                "libnix.dylib",
+                "libstd.dylib",
                 "libc",
-                "libm",
-                "libdl",
             ],
         },
     },
@@ -7087,34 +7458,6 @@ cc_prebuilt_library_shared {
                 "libm",
                 "libdl",
                 "libc",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    prefer: true,
-    soc_specific: true,
-}
-
-cc_prebuilt_library_shared {
-    name: "libdeccfg",
-    owner: "google",
-    strip: {
-        none: true,
-    },
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/lib64/libdeccfg.so",
-            ],
-            shared_libs: [
-                "libdapparamstorage",
-                "libcutils",
-                "libutils",
-                "liblog",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
             ],
         },
     },
@@ -7262,7 +7605,7 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libexynosdisplay.so",
             ],
             shared_libs: [
-                "com.google.hardware.pixel.display-V17-ndk",
+                "com.google.hardware.pixel.display-V23-ndk",
                 "liblog",
                 "libcutils",
                 "libhardware",
@@ -7281,7 +7624,7 @@ cc_prebuilt_library_shared {
                 "android.hardware.power-V2-ndk",
                 "pixel-power-ext-V1-ndk",
                 "pixel_stateresidency_provider_aidl_interface-ndk",
-                "android.hardware.graphics.composer3-V4-ndk",
+                "android.hardware.graphics.composer3-V5-ndk",
                 "android.hardware.drm-V1-ndk",
                 "android.frameworks.stats-V2-ndk",
                 "libpixelatoms_defs",
@@ -7348,6 +7691,27 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
+    name: "libgpuflag_aconfig_rust.dylib",
+    owner: "google",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libgpuflag_aconfig_rust.dylib.so",
+            ],
+            shared_libs: [
+                "libc",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
     name: "libgril_oem-google",
     owner: "google",
     strip: {
@@ -7405,34 +7769,6 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
-    name: "libmemtrack-pixel",
-    owner: "google",
-    strip: {
-        none: true,
-    },
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/lib64/libmemtrack-pixel.so",
-            ],
-            shared_libs: [
-                "android.hardware.memtrack-V1-ndk",
-                "libbase",
-                "libbinder_ndk",
-                "liblog",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    prefer: true,
-    soc_specific: true,
-}
-
-cc_prebuilt_library_shared {
     name: "libmodem_svc_proto_legacy_soong",
     owner: "google",
     strip: {
@@ -7444,7 +7780,7 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libmodem_svc_proto_legacy_soong.so",
             ],
             shared_libs: [
-                "libprotobuf-cpp-full",
+                "libprotobuf-cpp-full-6.33.5-absl20260526",
                 "libcutils",
                 "liblog",
                 "libbase",
@@ -7479,7 +7815,6 @@ cc_prebuilt_library_shared {
                 "libnos",
                 "libutils",
                 "pixelatoms-cpp",
-                "pixelpowerstats_provider_aidl_interface-cpp",
                 "libc++",
                 "libc",
                 "libm",
@@ -7528,17 +7863,47 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libpixelstats.so",
             ],
             shared_libs: [
-                "android.frameworks.stats-V2-ndk",
+                "android.frameworks.stats-V3-ndk",
                 "libbase",
                 "libbinder_ndk",
                 "libcutils",
                 "libhidlbase",
                 "liblog",
-                "libprotobuf-cpp-lite",
+                "libprotobuf-cpp-lite-6.33.5-absl20260526",
                 "libutils",
                 "libsensorndkbridge",
                 "pixelatoms-cpp",
                 "libjsoncpp",
+                "pixelstats_flags_c_lib",
+                "libaconfig_storage_read_api_cc",
+                "libpixelstatsflags",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libpixelstatsflags",
+    owner: "google",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libpixelstatsflags.so",
+            ],
+            shared_libs: [
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "liblog",
                 "libc++",
                 "libc",
                 "libm",
@@ -7590,9 +7955,10 @@ cc_prebuilt_library_shared {
             ],
             shared_libs: [
                 "liblog",
+                "libbase",
                 "libcutils",
                 "libsit_oem_proto",
-                "libprotobuf-cpp-full",
+                "libprotobuf-cpp-lite-6.33.5-absl20260526",
                 "libc++",
                 "libc",
                 "libm",
@@ -7617,7 +7983,7 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/libsit_oem_proto.so",
             ],
             shared_libs: [
-                "libprotobuf-cpp-full",
+                "libprotobuf-cpp-lite-6.33.5-absl20260526",
                 "libc++",
                 "libc",
                 "libm",
@@ -7817,7 +8183,7 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
-    name: "vendor.google.audiometricext@1.0",
+    name: "pixelstats_flags_c_lib",
     owner: "google",
     strip: {
         none: true,
@@ -7825,13 +8191,37 @@ cc_prebuilt_library_shared {
     target: {
         android_arm64: {
             srcs: [
-                "proprietary/vendor/lib64/vendor.google.audiometricext@1.0.so",
+                "proprietary/vendor/lib64/pixelstats_flags_c_lib.so",
             ],
             shared_libs: [
-                "libhidlbase",
+                "libaconfig_storage_read_api_cc",
+                "libbase",
                 "liblog",
-                "libutils",
-                "libcutils",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "thermal-budget-interface-ndk",
+    owner: "google",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/thermal-budget-interface-ndk.so",
+            ],
+            shared_libs: [
+                "libbinder_ndk",
                 "libc++",
                 "libc",
                 "libm",
@@ -7920,7 +8310,7 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
-    name: "vendor.google.wireless_charger-V5-ndk",
+    name: "vendor.google.plat_security-V1-ndk",
     owner: "google",
     strip: {
         none: true,
@@ -7928,7 +8318,7 @@ cc_prebuilt_library_shared {
     target: {
         android_arm64: {
             srcs: [
-                "proprietary/vendor/lib64/vendor.google.wireless_charger-V5-ndk.so",
+                "proprietary/vendor/lib64/vendor.google.plat_security-V1-ndk.so",
             ],
             shared_libs: [
                 "libbinder_ndk",
@@ -7945,7 +8335,7 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
-    name: "vendor.google.wireless_charger.service-V2-ndk",
+    name: "vendor.google.wireless_charger-V8-ndk",
     owner: "google",
     strip: {
         none: true,
@@ -7953,11 +8343,36 @@ cc_prebuilt_library_shared {
     target: {
         android_arm64: {
             srcs: [
-                "proprietary/vendor/lib64/vendor.google.wireless_charger.service-V2-ndk.so",
+                "proprietary/vendor/lib64/vendor.google.wireless_charger-V8-ndk.so",
             ],
             shared_libs: [
                 "libbinder_ndk",
-                "vendor.google.wireless_charger-V5-ndk",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "vendor.google.wireless_charger.service-V3-ndk",
+    owner: "google",
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/vendor.google.wireless_charger.service-V3-ndk.so",
+            ],
+            shared_libs: [
+                "libbinder_ndk",
+                "vendor.google.wireless_charger-V8-ndk",
                 "libc++",
                 "libc",
                 "libm",
@@ -8006,7 +8421,7 @@ cc_prebuilt_library_shared {
                 "proprietary/vendor/lib64/vendor_chre_metrics-cpp.so",
             ],
             shared_libs: [
-                "libprotobuf-cpp-lite",
+                "libprotobuf-cpp-lite-6.33.5-absl20260526",
                 "libc++",
                 "libc",
                 "libm",
@@ -8028,10 +8443,10 @@ prebuilt_apex {
 }
 
 prebuilt_apex {
-    name: "com.google.android.widevine-13130248",
+    name: "com.google.android.widevine-15027108-cp2a",
     owner: "google",
-    src: "proprietary/vendor/apex/com.google.android.widevine-13130248.apex",
-    filename: "com.google.android.widevine-13130248.apex",
+    src: "proprietary/vendor/apex/com.google.android.widevine-15027108-cp2a.apex",
+    filename: "com.google.android.widevine-15027108-cp2a.apex",
     soc_specific: true,
 }
 
@@ -8089,27 +8504,9 @@ prebuilt_etc_xml {
 }
 
 prebuilt_etc_xml {
-    name: "android.hardware.camera.provider@2.7-service-google-apex.xml",
-    owner: "google",
-    src: "proprietary/vendor/etc/vintf/manifest/android.hardware.camera.provider@2.7-service-google-apex.xml",
-    filename_from_src: true,
-    sub_dir: "vintf/manifest",
-    soc_specific: true,
-}
-
-prebuilt_etc_xml {
     name: "android.hardware.contexthub-service.generic.xml",
     owner: "google",
     src: "proprietary/vendor/etc/vintf/manifest/android.hardware.contexthub-service.generic.xml",
-    filename_from_src: true,
-    sub_dir: "vintf/manifest",
-    soc_specific: true,
-}
-
-prebuilt_etc_xml {
-    name: "android.hardware.dumpstate.3-service.xml",
-    owner: "google",
-    src: "proprietary/vendor/etc/vintf/manifest/android.hardware.dumpstate.3-service.xml",
     filename_from_src: true,
     sub_dir: "vintf/manifest",
     soc_specific: true,
@@ -8143,9 +8540,18 @@ prebuilt_etc_xml {
 }
 
 prebuilt_etc_xml {
-    name: "android.hardware.security.keymint-service.citadel.xml",
+    name: "android.hardware.security.keymint-service-v3.citadel.xml",
     owner: "google",
-    src: "proprietary/vendor/etc/vintf/manifest/android.hardware.security.keymint-service.citadel.xml",
+    src: "proprietary/vendor/etc/vintf/manifest/android.hardware.security.keymint-service-v3.citadel.xml",
+    filename_from_src: true,
+    sub_dir: "vintf/manifest",
+    soc_specific: true,
+}
+
+prebuilt_etc_xml {
+    name: "android.hardware.security.sharesecret-service.citadel.xml",
+    owner: "google",
+    src: "proprietary/vendor/etc/vintf/manifest/android.hardware.security.sharesecret-service.citadel.xml",
     filename_from_src: true,
     sub_dir: "vintf/manifest",
     soc_specific: true,
@@ -8164,15 +8570,6 @@ prebuilt_etc_xml {
     name: "android.hardware.weaver-service.citadel.xml",
     owner: "google",
     src: "proprietary/vendor/etc/vintf/manifest/android.hardware.weaver-service.citadel.xml",
-    filename_from_src: true,
-    sub_dir: "vintf/manifest",
-    soc_specific: true,
-}
-
-prebuilt_etc_xml {
-    name: "dmd.xml",
-    owner: "google",
-    src: "proprietary/vendor/etc/vintf/manifest/dmd.xml",
     filename_from_src: true,
     sub_dir: "vintf/manifest",
     soc_specific: true,
@@ -8208,7 +8605,7 @@ prebuilt_etc_xml {
 prebuilt_etc_xml {
     name: "manifest.xml",
     owner: "google",
-    src: "proprietary/vendor/etc/vintf/manifest/manifest.xml",
+    src: "proprietary/vendor/etc/vintf/manifest/manifest_mapper_framework.xml",
     filename_from_src: true,
     sub_dir: "vintf/manifest",
     soc_specific: true,
@@ -8233,27 +8630,9 @@ prebuilt_etc_xml {
 }
 
 prebuilt_etc_xml {
-    name: "manifest_input.processor-service.xml",
-    owner: "google",
-    src: "proprietary/vendor/etc/vintf/manifest/manifest_input.processor-service.xml",
-    filename_from_src: true,
-    sub_dir: "vintf/manifest",
-    soc_specific: true,
-}
-
-prebuilt_etc_xml {
     name: "manifest_radioext.xml",
     owner: "google",
     src: "proprietary/vendor/etc/vintf/manifest/manifest_radioext.xml",
-    filename_from_src: true,
-    sub_dir: "vintf/manifest",
-    soc_specific: true,
-}
-
-prebuilt_etc_xml {
-    name: "memtrack.xml",
-    owner: "google",
-    src: "proprietary/vendor/etc/vintf/manifest/memtrack.xml",
     filename_from_src: true,
     sub_dir: "vintf/manifest",
     soc_specific: true,
@@ -8287,9 +8666,9 @@ prebuilt_etc_xml {
 }
 
 prebuilt_etc_xml {
-    name: "vendor.dolby.media.c2@1.0-service.xml",
+    name: "vendor.dolby.media.c2-default-service.xml",
     owner: "google",
-    src: "proprietary/vendor/etc/vintf/manifest/vendor.dolby.media.c2@1.0-service.xml",
+    src: "proprietary/vendor/etc/vintf/manifest/vendor.dolby.media.c2-default-service.xml",
     filename_from_src: true,
     sub_dir: "vintf/manifest",
     soc_specific: true,
@@ -8317,6 +8696,15 @@ prebuilt_etc_xml {
     name: "vendor.google.google_battery-default.xml",
     owner: "google",
     src: "proprietary/vendor/etc/vintf/manifest/vendor.google.google_battery-default.xml",
+    filename_from_src: true,
+    sub_dir: "vintf/manifest",
+    soc_specific: true,
+}
+
+prebuilt_etc_xml {
+    name: "vendor.google.plat_security-service.xml",
+    owner: "google",
+    src: "proprietary/vendor/etc/vintf/manifest/vendor.google.plat_security-service.xml",
     filename_from_src: true,
     sub_dir: "vintf/manifest",
     soc_specific: true,
@@ -8353,6 +8741,7 @@ cc_prebuilt_binary {
                 "libbase",
                 "libevent",
                 "liblog",
+                "aoc_aconfig_flags_c_lib",
                 "libc++",
                 "libc",
                 "libm",
@@ -8385,7 +8774,7 @@ cc_prebuilt_binary {
                 "libutils",
                 "libpower",
                 "aoc_aconfig_flags_c_lib",
-                "aocx-V2-ndk",
+                "aocx-V3-ndk",
                 "libc++",
                 "libc",
                 "libm",
@@ -8413,6 +8802,7 @@ cc_prebuilt_binary {
                 "liblog",
                 "libutils",
                 "libcutils",
+                "libnl",
                 "libc++",
                 "libc",
                 "libm",
@@ -8443,34 +8833,6 @@ cc_prebuilt_binary {
                 "libc",
                 "libz",
                 "libc++",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    strip: {
-        none: true,
-    },
-    prefer: true,
-    soc_specific: true,
-}
-
-cc_prebuilt_binary {
-    name: "dmd",
-    owner: "google",
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/bin/dmd",
-            ],
-            shared_libs: [
-                "liblog",
-                "libutils",
-                "libcutils",
-                "libziparchive",
-                "libc++",
-                "libc",
                 "libm",
                 "libdl",
             ],
@@ -8859,8 +9221,32 @@ cc_prebuilt_binary {
                 "proprietary/vendor/bin/flood.control.hal",
             ],
             shared_libs: [
-                "liblog",
                 "libbinder_ndk",
+                "libc",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    strip: {
+        none: true,
+    },
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_binary {
+    name: "gpuflag",
+    owner: "google",
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/bin/gpuflag",
+            ],
+            shared_libs: [
+                "libandroid_logger.dylib",
+                "librustutils.dylib",
+                "liblog_rust.dylib",
+                "libstd.dylib",
                 "libc",
             ],
         },
@@ -8965,13 +9351,14 @@ cc_prebuilt_binary {
             shared_libs: [
                 "android.hardware.bluetooth-V1-ndk",
                 "android.hardware.bluetooth.finder-V1-ndk",
-                "android.hardware.bluetooth.ranging-V1-ndk",
+                "android.hardware.bluetooth.lmp_event-V1-ndk",
+                "android.hardware.bluetooth.ranging-V2-ndk",
                 "libbase",
                 "libbinder_ndk",
                 "libcutils",
                 "libhidlbase",
                 "libhardware_legacy",
-                "libprotobuf-cpp-full",
+                "libprotobuf-cpp-full-6.33.5-absl20260526",
                 "liblog",
                 "libutils",
                 "libusf",
@@ -9004,8 +9391,8 @@ cc_prebuilt_binary {
                 "proprietary/vendor/bin/hw/android.hardware.composer.hwc3-service.pixel",
             ],
             shared_libs: [
-                "com.google.hardware.pixel.display-V17-ndk",
-                "android.hardware.graphics.composer3-V4-ndk",
+                "com.google.hardware.pixel.display-V23-ndk",
+                "android.hardware.graphics.composer3-V5-ndk",
                 "android.hardware.graphics.composer@2.1-resources",
                 "android.hardware.graphics.composer@2.2-resources",
                 "android.hardware.graphics.composer@2.4",
@@ -9051,7 +9438,7 @@ cc_prebuilt_binary {
             ],
             shared_libs: [
                 "android.frameworks.stats-V2-ndk",
-                "android.hardware.contexthub-V4-ndk",
+                "android.hardware.contexthub-V5-ndk",
                 "chre_atoms_log",
                 "chremetrics-cpp",
                 "libaconfig_storage_read_api_cc",
@@ -9060,79 +9447,16 @@ cc_prebuilt_binary {
                 "libcutils",
                 "libjsoncpp",
                 "liblog",
-                "libprotobuf-cpp-lite",
+                "libprotobuf-cpp-lite-6.33.5-absl20260526",
                 "libutils",
                 "server_configurable_flags",
                 "pixelatoms-cpp",
+                "android.hardware.bluetooth.socket-V2-ndk",
+                "libdmabufheap",
                 "libpower",
                 "libusf",
                 "vendor_chre_atoms_log",
                 "vendor_chre_metrics-cpp",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    strip: {
-        none: true,
-    },
-    prefer: true,
-    relative_install_path: "hw",
-    soc_specific: true,
-}
-
-cc_prebuilt_binary {
-    name: "android.hardware.dumpstate.3-service",
-    owner: "google",
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/bin/hw/android.hardware.dumpstate.3-service",
-            ],
-            shared_libs: [
-                "libbase",
-                "libbinder_ndk",
-                "libcutils",
-                "libdumpstateutil",
-                "liblog",
-                "libutils",
-                "libdump",
-                "android.hardware.dumpstate-V1-ndk",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    strip: {
-        none: true,
-    },
-    prefer: true,
-    relative_install_path: "hw",
-    soc_specific: true,
-}
-
-cc_prebuilt_binary {
-    name: "android.hardware.edgetpu.logging@service-edgetpu-logging",
-    owner: "google",
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/bin/hw/android.hardware.edgetpu.logging@service-edgetpu-logging",
-            ],
-            shared_libs: [
-                "libbase",
-                "libcutils",
-                "libfmq",
-                "liblog",
-                "libui",
-                "libutils",
-                "lib_reader",
                 "libc++",
                 "libc",
                 "libm",
@@ -9211,101 +9535,6 @@ cc_prebuilt_binary {
 }
 
 cc_prebuilt_binary {
-    name: "android.hardware.gxp.logging@service-gxp-logging",
-    owner: "google",
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/bin/hw/android.hardware.gxp.logging@service-gxp-logging",
-            ],
-            shared_libs: [
-                "libbase",
-                "libcutils",
-                "libfmq",
-                "liblog",
-                "libui",
-                "libutils",
-                "gxp_telemetry_reader",
-                "fake_gxp_telemetry_reader",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    strip: {
-        none: true,
-    },
-    prefer: true,
-    relative_install_path: "hw",
-    soc_specific: true,
-}
-
-cc_prebuilt_binary {
-    name: "android.hardware.input.processor-service",
-    owner: "google",
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/bin/hw/android.hardware.input.processor-service",
-            ],
-            shared_libs: [
-                "android.hardware.input.common-V1-ndk",
-                "android.hardware.input.processor-V1-ndk",
-                "libbase",
-                "libbinder_ndk",
-                "libcutils",
-                "libdeeptouch",
-                "liblog",
-                "libutils",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    strip: {
-        none: true,
-    },
-    prefer: true,
-    relative_install_path: "hw",
-    soc_specific: true,
-}
-
-cc_prebuilt_binary {
-    name: "android.hardware.memtrack-service.pixel",
-    owner: "google",
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/bin/hw/android.hardware.memtrack-service.pixel",
-            ],
-            shared_libs: [
-                "android.hardware.memtrack-V1-ndk",
-                "libbase",
-                "libbinder_ndk",
-                "libmemtrack-pixel",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    strip: {
-        none: true,
-    },
-    prefer: true,
-    relative_install_path: "hw",
-    soc_specific: true,
-}
-
-cc_prebuilt_binary {
     name: "android.hardware.neuralnetworks@service-darwinn-aidl",
     owner: "google",
     target: {
@@ -9326,7 +9555,7 @@ cc_prebuilt_binary {
                 "libbinder_ndk",
                 "liblog",
                 "libnativewindow",
-                "libprotobuf-cpp-full",
+                "libprotobuf-cpp-full-6.33.5-absl20260526",
                 "libutils",
                 "android.hardware.neuralnetworks-V4-ndk",
                 "android.hardware.neuralnetworks@1.0",
@@ -9501,16 +9730,16 @@ cc_prebuilt_binary {
                 "libcppbor",
                 "libnos",
                 "libnosprotos",
-                "libprotobuf-cpp-full",
+                "libprotobuf-cpp-full-6.33.5-absl20260526",
                 "libkeymaster_portable",
                 "liblog",
                 "libutils",
                 "android.hardware.security.rkp-V3-ndk",
                 "android.hardware.security.sharedsecret-V1-ndk",
-                "android.hardware.security.keymint-V3-ndk",
                 "android.hardware.security.keymint-impl.nos",
                 "libnos_citadeld_proxy",
                 "nos_app_keymaster",
+                "android.hardware.security.keymint-V3-ndk",
                 "libc++",
                 "libc",
                 "libm",
@@ -9536,7 +9765,7 @@ cc_prebuilt_binary {
                 "proprietary/vendor/bin/hw/android.hardware.vibrator-service.cs40l26",
             ],
             shared_libs: [
-                "libprotobuf-cpp-lite",
+                "libprotobuf-cpp-lite-6.33.5-absl20260526",
                 "libbinder_ndk",
                 "libhardware",
                 "liblog",
@@ -9575,7 +9804,7 @@ cc_prebuilt_binary {
                 "libnos",
                 "libnosprotos",
                 "libutils",
-                "android.hardware.weaver-V2-ndk",
+                "android.hardware.weaver-V3-ndk",
                 "android.hardware.weaver-bridge.nos",
                 "android.hardware.weaver-impl.nos",
                 "android.hardware.weaver2-impl.nos",
@@ -9639,6 +9868,33 @@ cc_prebuilt_binary {
 }
 
 cc_prebuilt_binary {
+    name: "block_queue_depth",
+    owner: "google",
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/bin/hw/block_queue_depth",
+            ],
+            shared_libs: [
+                "libbase",
+                "liblog",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    strip: {
+        none: true,
+    },
+    prefer: true,
+    relative_install_path: "hw",
+    soc_specific: true,
+}
+
+cc_prebuilt_binary {
     name: "citadel_updater",
     owner: "google",
     target: {
@@ -9683,7 +9939,6 @@ cc_prebuilt_binary {
                 "libbinder_ndk",
                 "libutils",
                 "pixelatoms-cpp",
-                "pixelpowerstats_provider_aidl_interface-cpp",
                 "libnos",
                 "libnos_client_citadel",
                 "libnos_transport",
@@ -9763,15 +10018,14 @@ cc_prebuilt_binary {
                 "libaconfig_storage_read_api_cc",
                 "libbase",
                 "libcodec2_hal_common",
+                "libcodec2_vndk",
+                "android.hardware.media.c2-V2-ndk",
+                "libcodec2_aidl_V2",
                 "liblog",
                 "libutils",
                 "libavservices_minijail",
                 "libvndksupport",
                 "libbinder_ndk",
-                "android.hardware.media.c2@1.0",
-                "android.hardware.media.c2-V1-ndk",
-                "libcodec2_vndk",
-                "libcodec2_aidl",
                 "libcodec2",
                 "libgc2_store",
                 "libgc2_log",
@@ -9905,6 +10159,11 @@ cc_prebuilt_binary {
                 "proprietary/vendor/bin/hw/samsung.hardware.media.c2@1.2-service",
             ],
             shared_libs: [
+                "libaconfig_storage_read_api_cc",
+                "libbase",
+                "libcodec2_vndk",
+                "android.hardware.media.c2-V2-ndk",
+                "libcodec2_aidl_V2",
                 "libion_google",
                 "libmedia_ecoservice",
                 "libui",
@@ -9916,13 +10175,10 @@ cc_prebuilt_binary {
                 "libavservices_minijail",
                 "libbinder",
                 "libbinder_ndk",
-                "libcodec2_vndk",
                 "libstagefright_xmlparser",
                 "liblog",
                 "libutils",
                 "libExynosC2ComponentStore",
-                "android.hardware.media.c2-V1-ndk",
-                "libcodec2_aidl",
                 "libcodec2",
                 "libcodec2_hal_common",
                 "server_configurable_flags",
@@ -9973,29 +10229,18 @@ cc_prebuilt_binary {
 }
 
 cc_prebuilt_binary {
-    name: "vendor.dolby.media.c2@1.0-service",
+    name: "usboffmode",
     owner: "google",
     target: {
         android_arm64: {
             srcs: [
-                "proprietary/vendor/bin/hw/vendor.dolby.media.c2@1.0-service",
+                "proprietary/vendor/bin/hw/usboffmode",
             ],
             shared_libs: [
-                "server_configurable_flags",
-                "libaconfig_storage_read_api_cc",
                 "libbase",
                 "liblog",
-                "libcodec2",
-                "libcodec2_hal_common",
-                "libcodec2_vndk",
                 "libutils",
-                "android.hardware.media.c2-V1-ndk",
-                "libbinder_ndk",
-                "libcodec2_aidl_noisurface",
-                "libavservices_minijail",
-                "libbinder",
-                "libcodec2_soft_ddpdec",
-                "libcodec2_store_dolby",
+                "libcutils",
                 "libc++",
                 "libc",
                 "libm",
@@ -10013,20 +10258,28 @@ cc_prebuilt_binary {
 }
 
 cc_prebuilt_binary {
-    name: "vendor.google.audiometricext@1.0-service-vendor",
+    name: "vendor.dolby.media.c2-default-service",
     owner: "google",
     target: {
         android_arm64: {
             srcs: [
-                "proprietary/vendor/bin/hw/vendor.google.audiometricext@1.0-service-vendor",
+                "proprietary/vendor/bin/hw/vendor.dolby.media.c2-default-service",
             ],
             shared_libs: [
-                "libhidlbase",
-                "libutils",
+                "server_configurable_flags",
+                "libaconfig_storage_read_api_cc",
                 "libbase",
                 "liblog",
-                "libcutils",
-                "vendor.google.audiometricext@1.0",
+                "libcodec2",
+                "libcodec2_hal_common",
+                "libcodec2_vndk",
+                "libutils",
+                "android.hardware.media.c2-V2-ndk",
+                "libbinder_ndk",
+                "libcodec2_aidl_noisurface",
+                "libavservices_minijail",
+                "libbinder",
+                "libcodec2_store_dolby",
                 "libc++",
                 "libc",
                 "libm",
@@ -10104,6 +10357,40 @@ cc_prebuilt_binary {
 }
 
 cc_prebuilt_binary {
+    name: "vendor.google.plat_security-service",
+    owner: "google",
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/bin/hw/vendor.google.plat_security-service",
+            ],
+            shared_libs: [
+                "libbase",
+                "libcutils",
+                "liblog",
+                "libtrusty",
+                "libbinder_ndk",
+                "libdmabufheap",
+                "vendor.google.plat_security-V1-ndk",
+                "android.hardware.security.timestamp-V1-ndk",
+                "libaconfig_storage_read_api_cc",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    strip: {
+        none: true,
+    },
+    prefer: true,
+    relative_install_path: "hw",
+    soc_specific: true,
+}
+
+cc_prebuilt_binary {
     name: "vendor.google.radioext@1.0-service",
     owner: "google",
     target: {
@@ -10155,7 +10442,7 @@ cc_prebuilt_binary {
                 "libutils",
                 "libwlcproto_aidl-default",
                 "librtxproto_aidl-default",
-                "vendor.google.wireless_charger-V5-ndk",
+                "vendor.google.wireless_charger-V8-ndk",
                 "libc++",
                 "libc",
                 "libm",
@@ -10187,8 +10474,8 @@ cc_prebuilt_binary {
                 "libcrypto",
                 "libutils-default",
                 "libcutils",
-                "vendor.google.wireless_charger-V5-ndk",
-                "vendor.google.wireless_charger.service-V2-ndk",
+                "vendor.google.wireless_charger-V8-ndk",
+                "vendor.google.wireless_charger.service-V3-ndk",
                 "android.hardware.health-V4-ndk",
                 "server_configurable_flags",
                 "libaconfig_storage_read_api_cc",
@@ -10249,69 +10536,6 @@ sh_binary {
 }
 
 cc_prebuilt_binary {
-    name: "modem_logging_control",
-    owner: "google",
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/bin/modem_logging_control",
-            ],
-            shared_libs: [
-                "vendor.samsung_slsi.telephony.hardware.oemservice@1.0",
-                "liblog",
-                "libbase",
-                "libutils",
-                "libcutils",
-                "libhidlbase",
-                "libtinyxml2",
-                "libziparchive",
-                "libbinder_ndk",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    strip: {
-        none: true,
-    },
-    prefer: true,
-    soc_specific: true,
-}
-
-cc_prebuilt_binary {
-    name: "pixelstats-vendor",
-    owner: "google",
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/bin/pixelstats-vendor",
-            ],
-            shared_libs: [
-                "libbase",
-                "libbinder_ndk",
-                "liblog",
-                "libutils",
-                "libpixelstats",
-                "libjsoncpp",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    strip: {
-        none: true,
-    },
-    prefer: true,
-    soc_specific: true,
-}
-
-cc_prebuilt_binary {
     name: "rfsd",
     owner: "google",
     target: {
@@ -10349,12 +10573,13 @@ cc_prebuilt_binary {
             ],
             shared_libs: [
                 "libbinder_ndk",
-                "libbase",
                 "libcutils",
                 "libjsoncpp",
-                "liblog",
                 "libmodem_svc_proto_legacy_soong",
-                "libprotobuf-cpp-full",
+                "libprotobuf-cpp-full-6.33.5-absl20260526",
+                "libbase",
+                "liblog",
+                "libaconfig_storage_read_api_cc",
                 "libc++",
                 "libc",
                 "libm",
@@ -10380,12 +10605,13 @@ cc_prebuilt_binary {
             ],
             shared_libs: [
                 "libbinder_ndk",
-                "libbase",
                 "libcutils",
                 "libjsoncpp",
-                "liblog",
                 "libmodem_svc_proto_legacy_soong",
-                "libprotobuf-cpp-full",
+                "libprotobuf-cpp-full-6.33.5-absl20260526",
+                "libbase",
+                "liblog",
+                "libaconfig_storage_read_api_cc",
                 "libc++",
                 "libc",
                 "libm",
@@ -10401,31 +10627,11 @@ cc_prebuilt_binary {
     soc_specific: true,
 }
 
-cc_prebuilt_binary {
-    name: "sscoredump",
+sh_binary {
+    name: "storage_init",
     owner: "google",
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/bin/sscoredump",
-            ],
-            shared_libs: [
-                "libbase",
-                "liblog",
-                "libutils",
-                "libcutils",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    strip: {
-        none: true,
-    },
-    prefer: true,
+    src: "proprietary/vendor/bin/storage_init.sh",
+    filename: "storage_init.sh",
     soc_specific: true,
 }
 
@@ -10447,46 +10653,6 @@ cc_prebuilt_binary {
                 "libutils",
                 "android.frameworks.stats-V1-cpp",
                 "android.trusty.stats.nw.setter-cpp",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    strip: {
-        none: true,
-    },
-    prefer: true,
-    soc_specific: true,
-}
-
-cc_prebuilt_binary {
-    name: "twoshay",
-    owner: "google",
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/bin/twoshay",
-            ],
-            shared_libs: [
-                "com.google.input-V6-ndk",
-                "libbase",
-                "libbinder",
-                "libcrypto",
-                "libcutils",
-                "libhidlbase",
-                "libjsoncpp",
-                "liblog",
-                "libui",
-                "libutils",
-                "android.frameworks.stats-V2-ndk",
-                "libbinder_ndk",
-                "libprotobuf-cpp-full",
-                "libtouchflow",
-                "server_configurable_flags",
-                "libaconfig_storage_read_api_cc",
                 "libc++",
                 "libc",
                 "libm",
