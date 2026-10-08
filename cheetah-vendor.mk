@@ -2742,7 +2742,7 @@ PRODUCT_PACKAGES += \
     libalertv3 \
     libcodec2_soft_ddpdec \
     libcodec2_store_dolby \
-    libcommand_fds.dylib \
+    libcommand_fds \
     libdarwinn_hal \
     libdeeptouch \
     libdrmresource \
@@ -2751,7 +2751,7 @@ PRODUCT_PACKAGES += \
     libedgetpu_util \
     libexynosdisplay \
     libgf_hal \
-    libgpuflag_aconfig_rust.dylib \
+    libgpuflag_aconfig_rust \
     libgril_oem-google \
     libgxp \
     libmodem_svc_proto_legacy_soong \

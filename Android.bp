@@ -7484,21 +7484,20 @@ cc_prebuilt_library_shared {
     soc_specific: true,
 }
 
-cc_prebuilt_library_shared {
-    name: "libcommand_fds.dylib",
+rust_prebuilt_dylib {
+    name: "libcommand_fds",
     owner: "google",
-    strip: {
-        none: true,
-    },
     target: {
         android_arm64: {
             srcs: [
                 "proprietary/vendor/lib64/libcommand_fds.dylib.so",
             ],
             shared_libs: [
-                "libnix.dylib",
-                "libstd.dylib",
                 "libc",
+            ],
+            rustlibs: [
+                "libnix",
+                "libstd",
             ],
         },
     },
@@ -7755,12 +7754,9 @@ cc_prebuilt_library_shared {
     soc_specific: true,
 }
 
-cc_prebuilt_library_shared {
-    name: "libgpuflag_aconfig_rust.dylib",
+rust_prebuilt_dylib {
+    name: "libgpuflag_aconfig_rust",
     owner: "google",
-    strip: {
-        none: true,
-    },
     target: {
         android_arm64: {
             srcs: [
@@ -9220,7 +9216,7 @@ sh_binary {
     soc_specific: true,
 }
 
-cc_prebuilt_binary {
+rust_prebuilt_binary {
     name: "dump_modem",
     owner: "google",
     target: {
@@ -9229,8 +9225,10 @@ cc_prebuilt_binary {
                 "proprietary/vendor/bin/dump/dump_modem",
             ],
             shared_libs: [
-                "libstd.dylib",
                 "libc",
+            ],
+            rustlibs: [
+                "libstd",
             ],
         },
     },
@@ -9514,7 +9512,7 @@ cc_prebuilt_binary {
     soc_specific: true,
 }
 
-cc_prebuilt_binary {
+rust_prebuilt_binary {
     name: "gpuflag",
     owner: "google",
     target: {
@@ -9523,11 +9521,13 @@ cc_prebuilt_binary {
                 "proprietary/vendor/bin/gpuflag",
             ],
             shared_libs: [
-                "libandroid_logger.dylib",
-                "librustutils.dylib",
-                "liblog_rust.dylib",
-                "libstd.dylib",
                 "libc",
+            ],
+            rustlibs: [
+                "libandroid_logger",
+                "librustutils",
+                "liblog_rust",
+                "libstd",
             ],
         },
     },
