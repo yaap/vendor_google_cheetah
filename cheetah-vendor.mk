@@ -741,8 +741,10 @@ PRODUCT_PACKAGES += \
     ConnMO \
     DCMO \
     DMService \
+    AICorePrebuilt \
     DeviceIntelligenceNetworkPrebuiltAstrea \
     DevicePersonalizationAiAiPrebuiltPixel2022 \
+    SettingsIntelligenceGooglePrebuilt \
     DiagMon \
     EuiccGoogle \
     HotwordEnrollmentOKGoogleFUSIONPro \
